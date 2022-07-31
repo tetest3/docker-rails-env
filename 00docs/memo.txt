@@ -15,5 +15,21 @@ project
 ┣ docker
 ┃ ┗ db (container_name:mysqldb) 53306 to 3306
 ┃ 
-┗(container_name:railsweb) app dir /myapp container-dir 3000 to 5300
+┣ src (container_name:railsweb) app dir /myapp container-dir 3000 to 5300
+┃ ┗ Dockerfile / entrypoint.sh/ Gemfile / Gemfile.lock
+┃
 ┗docker-compose.yml
+
+railsweb 
+	[ssh dir] /myapp
+	[mac os dir] /Users/haduru/dev_area/docker_rails/20220731_v2/src
+
+[最初の起動コマンド]
+
+cd /Users/haduru/dev_area/docker_rails/20220731_v2/
+docker-compose run --no-deps rails bundle exec rails new . --force --database=mysql
+
+
+  [起動コマンド]
+cd /Users/unzip/dev_area/xx/git_rep/dev/xx_docker
+docker-compose up -d
