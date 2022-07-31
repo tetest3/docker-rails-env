@@ -1,0 +1,12 @@
+dir構成
+
+project
+┣ docker
+┃ ┣ db
+┃ ┣ nginx
+┃ ┗ rails
+┣ myapp
+┗docker-compose.yml
+
+
+
