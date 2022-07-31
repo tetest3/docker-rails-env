@@ -1,0 +1,2 @@
+Github リモートリポジトリは、アクセスTokenが必要
+https://note.kiriukun.com/entry/20210904-github-password-authentication-was-removed
