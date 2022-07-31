@@ -53,6 +53,40 @@ docker-compose up -d --build
 	⠿ Container rails    Started
 	起動したっぽい
 
+	[終了コマンド]
+cd /Users/haduru/dev_area/docker_rails/20220731_v2/
+docker-compose stop
+	[result]
+
+	⠿ Container 20220731_v2_rails_run_ba761a74ff57  Stopped                                                                                                                                                0.0s
+	⠿ Container rails                               Stopped                                                                                                                                                0.0s
+	⠿ Container 20220731_v2_rails_run_4a89cdcb6b87  Stopped                                                                                                                                                0.1s
+	⠿ Container 20220731_v2_rails_run_99379559d9e3  Stopped                                                                                                                                                0.1s
+	⠿ Container 20220731_v2_rails_run_42768cd8765d  Stopped                                                                                                                                                0.1s
+	⠿ Container 20220731_v2_rails_run_ca9f80b79ff0  Stopped                                                                                                                                                0.0s
+	⠿ Container 20220731_v2_rails_run_fcad6b0532a2  Stopped                                                                                                                                                0.0s
+	⠿ Container 20220731_v2_rails_run_d6d30f4ccd11  Stopped                                                                                                                                                0.0s
+	⠿ Container 20220731_v2_rails_run_aeae2099c1fe  Stopped                                                                                                                                                0.0s
+	⠿ Container 20220731_v2_rails_run_5dd773652984  Stopped                                                                                                                                                0.1s
+	⠿ Container 20220731_v2_rails_run_5aadf5835bad  Stopped                                                                                                                                                0.1s
+	⠿ Container 20220731_v2_rails_run_f498c8068a06  Stopped                                                                                                                                                0.0s
+	⠿ Container mysqldb                             Stopped
+	
+	[起動コマンド]
+cd /Users/haduru/dev_area/docker_rails/20220731_v2/
+docker-compose up -d
+
+
+
+
+    web側のサーバーにSSH接続
+cd /Users/haduru/dev_area/docker_rails/20220731_v2
+    ・接続
+docker compose exec rails bash -> error service "rails" is not running container #1
+    ・接続後ー＞切断
+exit
+
+
 
   [起動コマンド]
 cd /Users/unzip/dev_area/xx/git_rep/dev/xx_docker
