@@ -1,12 +1,19 @@
+
+	参考URL
+	MySqlのつくりかたあり
+	先に一度DBなして作ってその後DBを追加して作る手順
+		(https://alterbo.jp/blog/ryu3-2106/)
+
+
+	↓のコピペでも良いかもとか思いながら、、
+		(https://zenn.dev/jinwatanabe/articles/4d26ac177069f374eb6a)
+
+
 dir構成
 
 project
 ┣ docker
-┃ ┣ db
-┃ ┣ nginx
-┃ ┗ rails
-┣ myapp
+┃ ┗ db (container_name:mysqldb) 53306 to 3306
+┃ 
+┗(container_name:railsweb) app dir /myapp container-dir 3000 to 5300
 ┗docker-compose.yml
-
-
-
