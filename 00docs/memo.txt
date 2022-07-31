@@ -15,7 +15,7 @@ project
 ┣ docker
 ┃ ┗ db (container_name:mysqldb) 53306 to 3306
 ┃ 
-┣ src (container_name:railsweb) app dir /myapp container-dir 3000 to 5300
+┣ src (container_name:railsweb) app dir /myapp container-dir 3001 to 53001
 ┃ ┗ Dockerfile / entrypoint.sh/ Gemfile / Gemfile.lock
 ┃
 ┗docker-compose.yml
@@ -28,6 +28,21 @@ railsweb
 
 cd /Users/haduru/dev_area/docker_rails/20220731_v2/
 docker-compose run --no-deps rails bundle exec rails new . --force --database=mysql
+	
+	↑のコマンドだと
+	Could not find gem 'sprockets-rails
+	として進まないので
+	
+
+docker-compose up -d --build
+
+	と実行してみた
+	[result]
+	Error response from daemon: driver failed programming external connectivity on endpoint rails (30965d37fe2f203c226c954089082716abc867753e7ea4018118d12f6a9e02e0): Bind for 0.0.0.0:3000 failed: port is already allocated
+	
+	
+	
+
 
 
   [起動コマンド]
