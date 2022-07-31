@@ -40,9 +40,18 @@ docker-compose up -d --build
 	[result]
 	Error response from daemon: driver failed programming external connectivity on endpoint rails (30965d37fe2f203c226c954089082716abc867753e7ea4018118d12f6a9e02e0): Bind for 0.0.0.0:3000 failed: port is already allocated
 	
-	
+	3000から3001にPort変更
 	
 
+	[再度]
+cd /Users/haduru/dev_area/docker_rails/20220731_v2/
+docker-compose up -d --build
+
+	[result]
+		[+] Running 2/2
+	⠿ Container mysqldb  Started                                                                                                     2.7s
+	⠿ Container rails    Started
+	起動したっぽい
 
 
   [起動コマンド]
