@@ -1,8 +1,8 @@
 version: '3.9'
 
 services:
-  railsweb:
-    container_name: railsweb
+  rails:
+    container_name: rails
     build: ./src
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
