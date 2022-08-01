@@ -1,4 +1,4 @@
-FROM ruby:alpine3.13
+FROM ruby:2.7.6
 RUN apk update \
       && apk add --no-cache gcc make libc-dev g++ mariadb-dev tzdata nodejs~=14 yarn
 WORKDIR /myapp
@@ -9,5 +9,5 @@ COPY . /myapp
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
-EXPOSE 3001
+EXPOSE 3000
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
