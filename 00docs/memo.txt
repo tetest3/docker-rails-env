@@ -7,6 +7,7 @@
 
 	↓のコピペでも良いかもとか思いながら、、
 		(https://zenn.dev/jinwatanabe/articles/4d26ac177069f374eb6a)
+		↑この記事の DockerFileのapt-get周りの記載は動かない
 
 
 dir構成
@@ -86,6 +87,63 @@ docker compose exec rails bash -> error service "rails" is not running container
     ・接続後ー＞切断
 exit
 
+	[色々あったので一旦削除してから作り直し]
+	[削除]
+
+cd /Users/haduru/dev_area/docker_rails/20220731_v2
+docker-compose down
+	[result]
+	⠿ Container 20220731_v2_rails_run_ba761a74ff57  Removed                                                                                                                                                0.2s
+	⠿ Container 20220731_v2_rails_run_5aadf5835bad  Removed                                                                                                                                                0.2s
+	⠿ Container rails                               Removed                                                                                                                                                0.2s
+	⠿ Container 20220731_v2_rails_run_42768cd8765d  Removed                                                                                                                                                0.2s
+	⠿ Container 20220731_v2_rails_run_aeae2099c1fe  Removed                                                                                                                                                0.2s
+	⠿ Container 20220731_v2_rails_run_ca9f80b79ff0  Removed                                                                                                                                                0.2s
+	⠿ Container 20220731_v2_rails_run_fcad6b0532a2  Removed                                                                                                                                                0.2s
+	⠿ Container 20220731_v2_rails_run_d6d30f4ccd11  Removed                                                                                                                                                0.2s
+	⠿ Container 20220731_v2_rails_run_5dd773652984  Removed                                                                                                                                                0.2s
+	⠿ Container 20220731_v2_rails_run_f498c8068a06  Removed                                                                                                                                                0.2s
+	⠿ Container 20220731_v2_rails_run_99379559d9e3  Removed                                                                                                                                                0.2s
+	⠿ Container 20220731_v2_rails_run_4a89cdcb6b87  Removed                                                                                                                                                0.2s
+	⠿ Container mysqldb                             Removed                                                                                                                                                0.0s
+	⠿ Network 20220731_v2_default                   Removed
+		
+
+
+	だめだと思うけどもう一度やってみる
+
+	[最初の起動コマンド]
+
+cd /Users/haduru/dev_area/docker_rails/20220731_v2/
+docker-compose run --no-deps rails bundle exec rails new . --force --database=mysql
+
+	[result-err]
+	bundler: failed to load command: rails (/usr/local/bundle/bin/rails)
+
+	↑のエラーのリカバリ
+
+cd /Users/haduru/dev_area/docker_rails/20220731_v2/
+docker-compose build 
+
+	[最初の起動コマンド](再々)
+
+cd /Users/haduru/dev_area/docker_rails/20220731_v2/
+docker-compose run --no-deps rails bundle exec rails new . --force --database=mysql
+
+
+	[動いているコンテナ調査用]
+
+docker images
+	↑Imagesを全部消す
+	
+	https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes-ja
+	
+	docker system prune -a
+
+docker image ls
+	
+
+docker container ls
 
 
   [起動コマンド]
