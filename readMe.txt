@@ -9,5 +9,3 @@ ruby
 	Ruby 3.1については、Rails 7.0.0では非対応ですが、今後サポートされる予定です。
 	
 	ということでruby 3を使う
-
-pull request test
