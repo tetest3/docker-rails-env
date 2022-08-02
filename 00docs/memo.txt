@@ -1,0 +1,151 @@
+
+	参考URL
+	MySqlのつくりかたあり
+	先に一度DBなして作ってその後DBを追加して作る手順
+		(https://alterbo.jp/blog/ryu3-2106/)
+
+
+	↓のコピペでも良いかもとか思いながら、、
+		(https://zenn.dev/jinwatanabe/articles/4d26ac177069f374eb6a)
+		↑この記事の DockerFileのapt-get周りの記載は動かない
+
+
+dir構成
+
+project
+┣ docker
+┃ ┗ db (container_name:mysqldb) 53306 to 3306
+┃ 
+┣ src (container_name:railsweb) app dir /myapp container-dir 3001 to 53001
+┃ ┗ Dockerfile / entrypoint.sh/ Gemfile / Gemfile.lock
+┃
+┗docker-compose.yml
+
+railsweb 
+	[ssh dir] /myapp
+	[mac os dir] /Users/haduru/dev_area/docker_rails/20220731_v2/src
+
+[最初の起動コマンド]
+
+cd /Users/haduru/dev_area/docker_rails/20220731_v2/
+docker-compose run --no-deps rails bundle exec rails new . --force --database=mysql
+	
+	↑のコマンドだと
+	Could not find gem 'sprockets-rails
+	として進まないので
+	
+
+docker-compose up -d --build
+
+	と実行してみた
+	[result]
+	Error response from daemon: driver failed programming external connectivity on endpoint rails (30965d37fe2f203c226c954089082716abc867753e7ea4018118d12f6a9e02e0): Bind for 0.0.0.0:3000 failed: port is already allocated
+	
+	3000から3001にPort変更
+	
+
+	[再度]
+cd /Users/haduru/dev_area/docker_rails/20220731_v2/
+docker-compose up -d --build
+
+	[result]
+		[+] Running 2/2
+	⠿ Container mysqldb  Started                                                                                                     2.7s
+	⠿ Container rails    Started
+	起動したっぽい
+
+	[終了コマンド]
+cd /Users/haduru/dev_area/docker_rails/20220731_v2/
+docker-compose stop
+	[result]
+
+	⠿ Container 20220731_v2_rails_run_ba761a74ff57  Stopped                                                                                                                                                0.0s
+	⠿ Container rails                               Stopped                                                                                                                                                0.0s
+	⠿ Container 20220731_v2_rails_run_4a89cdcb6b87  Stopped                                                                                                                                                0.1s
+	⠿ Container 20220731_v2_rails_run_99379559d9e3  Stopped                                                                                                                                                0.1s
+	⠿ Container 20220731_v2_rails_run_42768cd8765d  Stopped                                                                                                                                                0.1s
+	⠿ Container 20220731_v2_rails_run_ca9f80b79ff0  Stopped                                                                                                                                                0.0s
+	⠿ Container 20220731_v2_rails_run_fcad6b0532a2  Stopped                                                                                                                                                0.0s
+	⠿ Container 20220731_v2_rails_run_d6d30f4ccd11  Stopped                                                                                                                                                0.0s
+	⠿ Container 20220731_v2_rails_run_aeae2099c1fe  Stopped                                                                                                                                                0.0s
+	⠿ Container 20220731_v2_rails_run_5dd773652984  Stopped                                                                                                                                                0.1s
+	⠿ Container 20220731_v2_rails_run_5aadf5835bad  Stopped                                                                                                                                                0.1s
+	⠿ Container 20220731_v2_rails_run_f498c8068a06  Stopped                                                                                                                                                0.0s
+	⠿ Container mysqldb                             Stopped
+	
+	[起動コマンド]
+cd /Users/haduru/dev_area/docker_rails/20220731_v2/
+docker-compose up -d
+
+
+
+
+    web側のサーバーにSSH接続
+cd /Users/haduru/dev_area/docker_rails/20220731_v2
+    ・接続
+docker compose exec rails bash -> error service "rails" is not running container #1
+    ・接続後ー＞切断
+exit
+
+	[色々あったので一旦削除してから作り直し]
+	[削除]
+
+cd /Users/haduru/dev_area/docker_rails/20220731_v2
+docker-compose down
+	[result]
+	⠿ Container 20220731_v2_rails_run_ba761a74ff57  Removed                                                                                                                                                0.2s
+	⠿ Container 20220731_v2_rails_run_5aadf5835bad  Removed                                                                                                                                                0.2s
+	⠿ Container rails                               Removed                                                                                                                                                0.2s
+	⠿ Container 20220731_v2_rails_run_42768cd8765d  Removed                                                                                                                                                0.2s
+	⠿ Container 20220731_v2_rails_run_aeae2099c1fe  Removed                                                                                                                                                0.2s
+	⠿ Container 20220731_v2_rails_run_ca9f80b79ff0  Removed                                                                                                                                                0.2s
+	⠿ Container 20220731_v2_rails_run_fcad6b0532a2  Removed                                                                                                                                                0.2s
+	⠿ Container 20220731_v2_rails_run_d6d30f4ccd11  Removed                                                                                                                                                0.2s
+	⠿ Container 20220731_v2_rails_run_5dd773652984  Removed                                                                                                                                                0.2s
+	⠿ Container 20220731_v2_rails_run_f498c8068a06  Removed                                                                                                                                                0.2s
+	⠿ Container 20220731_v2_rails_run_99379559d9e3  Removed                                                                                                                                                0.2s
+	⠿ Container 20220731_v2_rails_run_4a89cdcb6b87  Removed                                                                                                                                                0.2s
+	⠿ Container mysqldb                             Removed                                                                                                                                                0.0s
+	⠿ Network 20220731_v2_default                   Removed
+		
+
+
+	だめだと思うけどもう一度やってみる
+
+	[最初の起動コマンド]
+
+cd /Users/haduru/dev_area/docker_rails/20220731_v2/
+docker-compose run --no-deps rails bundle exec rails new . --force --database=mysql
+
+	[result-err]
+	bundler: failed to load command: rails (/usr/local/bundle/bin/rails)
+
+	↑のエラーのリカバリ
+
+cd /Users/haduru/dev_area/docker_rails/20220731_v2/
+docker-compose build 
+
+	[最初の起動コマンド](再々)
+
+cd /Users/haduru/dev_area/docker_rails/20220731_v2/
+docker-compose run --no-deps rails bundle exec rails new . --force --database=mysql
+
+
+	[動いているコンテナ調査用]
+
+docker images
+	↑Imagesを全部消す
+	
+	https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes-ja
+	
+	docker system prune -a
+
+docker image ls
+	
+
+docker container ls
+
+
+  [起動コマンド]
+cd /Users/unzip/dev_area/xx/git_rep/dev/xx_docker
+docker-compose up -d
